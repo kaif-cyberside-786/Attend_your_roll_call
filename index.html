@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="page active">
+        <div class="container">
+            <div class="login-box">
+                <h1>📚 Attendance System</h1>
+                <h2>Teacher Login</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" required placeholder="Enter username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" required placeholder="Enter password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <div id="loginError" class="error-message"></div>
+                </form>
+                <div class="demo-credentials">
+                    <p><strong>Demo Credentials:</strong></p>
+                    <p>Username: teacher1 | Password: password123</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboardPage" class="page">
+        <nav class="navbar">
+            <div class="nav-content">
+                <h1>📚 Attendance Dashboard</h1>
+                <div class="nav-right">
+                    <span id="teacherName" class="teacher-name"></span>
+                    <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="dashboard-grid">
+                <!-- Start Attendance Card -->
+                <div class="card">
+                    <h2>📝 Mark Attendance</h2>
+                    <form id="attendanceForm">
+                        <div class="form-group">
+                            <label for="classSelect">Select Class</label>
+                            <select id="classSelect" required>
+                                <option value="">-- Choose Class --</option>
+                                <option value="CSA">CSA</option>
+                                
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="subjectSelect">Select Subject</label>
+                            <select id="subjectSelect" required>
+                                <option value="">-- Choose Subject --</option>
+                                <option value="DBMS">DBMS</option>
+                                <option value="DSA">DSA</option>
+                                
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dateSelect">Select Date</label>
+                            <input type="date" id="dateSelect" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Start Attendance</button>
+                    </form>
+                </div>
+
+                <!-- View Records Card -->
+                <div class="card">
+                    <h2>📊 View Attendance Records</h2>
+                    <form id="viewRecordsForm">
+                        <div class="form-group">
+                            <label for="viewClassSelect">Select Class</label>
+                            <select id="viewClassSelect" required>
+                                <option value="">-- Choose Class --</option>
+                                <option value="CSA">CSA</option>
+                                
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="viewDateSelect">Select Date</label>
+                            <input type="date" id="viewDateSelect" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">View Records</button>
+                    </form>
+                </div>
+
+                <!-- View All Students Attendance Card -->
+                <div class="card">
+                    <h2>👥 All Students Attendance</h2>
+                    <p>View complete attendance history for all students in a class</p>
+                    <form id="viewAllStudentsForm">
+                        <div class="form-group">
+                            <label for="allStudentsClassSelect">Select Class</label>
+                            <select id="allStudentsClassSelect" required>
+                                <option value="">-- Choose Class --</option>
+                                <option value="CSA">Class CSA</option>
+                                
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dateRangeStart">From Date (Optional)</label>
+                            <input type="date" id="dateRangeStart">
+                        </div>
+                        <div class="form-group">
+                            <label for="dateRangeEnd">To Date (Optional)</label>
+                            <input type="date" id="dateRangeEnd">
+                        </div>
+                        <button type="submit" class="btn btn-primary">View All Students</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Attendance Marking Page -->
+    <div id="attendancePage" class="page">
+        <nav class="navbar">
+            <div class="nav-content">
+                <h1>📝 Mark Attendance</h1>
+                <button id="backToDashboard" class="btn btn-secondary">← Back to Dashboard</button>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="attendance-header">
+                <h2 id="attendanceTitle"></h2>
+                <div class="attendance-info">
+                    <span id="attendanceClass"></span> | 
+                    <span id="attendanceSubject"></span> | 
+                    <span id="attendanceDate"></span>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <button id="markAllPresent" class="btn btn-sm">✓ Mark All Present</button>
+                <button id="markAllAbsent" class="btn btn-sm">✗ Mark All Absent</button>
+            </div>
+
+            <div id="studentsList" class="students-list"></div>
+
+            <div class="submit-section">
+                <button id="submitAttendance" class="btn btn-primary btn-large">Submit Attendance</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Records View Page -->
+    <div id="recordsPage" class="page">
+        <nav class="navbar">
+            <div class="nav-content">
+                <h1>📊 Attendance Records</h1>
+                <div class="nav-right">
+                    <button id="exportCSV" class="btn btn-success">Export CSV</button>
+                    <button id="backToDashboard2" class="btn btn-secondary">← Back to Dashboard</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div id="recordsHeader" class="records-header"></div>
+            <div id="recordsContent" class="records-content"></div>
+        </div>
+    </div>
+
+    <!-- All Students Attendance Page -->
+    <div id="allStudentsPage" class="page">
+        <nav class="navbar">
+            <div class="nav-content">
+                <h1>👥 All Students Attendance Overview</h1>
+                <div class="nav-right">
+                    <button id="exportAllStudentsCSV" class="btn btn-success">Export CSV</button>
+                    <button id="backToDashboard3" class="btn btn-secondary">← Back to Dashboard</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div id="allStudentsHeader" class="records-header"></div>
+            <div id="allStudentsContent" class="records-content"></div>
+        </div>
+    </div>
+
+    <!-- Firebase Configuration (Replace with your own config) -->
+    <script type="module">
+        // This is a demo configuration - replace with your own Firebase config
+        window.firebaseConfig = {
+            apiKey: "DEMO_API_KEY",
+            authDomain: "DEMO_PROJECT.firebaseapp.com",
+            projectId: "DEMO_PROJECT",
+            storageBucket: "DEMO_PROJECT.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "DEMO_APP_ID"
+        };
+    </script>
+
+    <script src="app.js" type="module"></script>
+</body>
+</html>
